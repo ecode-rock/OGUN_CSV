@@ -1,0 +1,55 @@
+name: Daily MLB Scrape
+
+on:
+  schedule:
+    # 8:00 AM Eastern = 13:00 UTC (EDT, Mar–Nov)
+    # Adjust to 12:00 UTC in winter if needed (EST = UTC-5)
+    - cron: "0 13 * * *"
+  workflow_dispatch:          # Allow manual trigger from GitHub Actions UI
+    inputs:
+      date:
+        description: "Override date (YYYY-MM-DD). Leave blank for yesterday."
+        required: false
+        default: ""
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # Needed to commit updated CSVs back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run fetch_yesterday.py
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            python pipeline/fetch_yesterday.py --date "${{ github.event.inputs.date }}"
+          else
+            python pipeline/fetch_yesterday.py
+          fi
+
+      - name: Commit updated CSVs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.csv edge_cases.log || true
+          # Only commit if there are changes
+          if git diff --cached --quiet; then
+            echo "No new data — nothing to commit."
+          else
+            DATE_STR=$(date -u +"%Y-%m-%d")
+            git commit -m "Auto-scrape: MLB data for ${DATE_STR}"
+            git push
+          fi
