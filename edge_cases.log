@@ -1,0 +1,39 @@
+14:02:16  INFO      ============================================================
+14:02:16  INFO      fetch_yesterday.py  |  target date: 2026-03-19
+14:02:16  INFO      ============================================================
+14:02:16  INFO      Fetching schedule for 2026-03-19 ...
+14:02:16  INFO      Found 14 Final game(s). Fetching pitch data...
+14:02:16  INFO      [1/14] Fetching game_pk=831452
+14:02:16  INFO        game_pk=831452    WSH@STL  284 rows
+14:02:18  INFO      [2/14] Fetching game_pk=831551
+14:02:18  INFO        game_pk=831551    TB@PHI  219 rows
+14:02:19  INFO      [3/14] Fetching game_pk=832062
+14:02:20  INFO        game_pk=832062    BAL@NYY  299 rows
+14:02:21  INFO      [4/14] Fetching game_pk=831605
+14:02:21  INFO        game_pk=831605    NYY@TOR  277 rows
+14:02:23  INFO      [5/14] Fetching game_pk=831500
+14:02:23  INFO        game_pk=831500    NYM@HOU  347 rows
+14:02:24  INFO      [6/14] Fetching game_pk=831501
+14:02:24  INFO        game_pk=831501    PIT@BAL  276 rows
+14:02:26  INFO      [7/14] Fetching game_pk=831606
+14:02:26  INFO        game_pk=831606    MIN@BOS  287 rows
+14:02:28  INFO      [8/14] Fetching game_pk=831822
+14:02:28  INFO        game_pk=831822    LAA@KC  301 rows
+14:02:29  INFO      [9/14] Fetching game_pk=831846
+14:02:29  INFO        game_pk=831846    KC@CLE  294 rows
+14:02:31  INFO      [10/14] Fetching game_pk=831962
+14:02:31  INFO        game_pk=831962    AZ@CWS  289 rows
+14:02:33  INFO      [11/14] Fetching game_pk=831755
+14:02:33  INFO        game_pk=831755    SEA@ATH  294 rows
+14:02:34  INFO      [12/14] Fetching game_pk=831756
+14:02:34  INFO        game_pk=831756    SF@COL  326 rows
+14:02:36  INFO      [13/14] Fetching game_pk=831907
+14:02:36  INFO        game_pk=831907    CWS@SD  330 rows
+14:02:37  INFO      [14/14] Fetching game_pk=831722
+14:02:38  INFO        game_pk=831722    TEX@MIL  311 rows
+14:02:39  INFO      Total raw rows: 4134
+14:02:39  INFO      Cleaning 4134 rows...
+14:02:39  INFO      Clean complete. Shape: (4134, 83)
+14:02:39  INFO        2026_03.csv — new file, writing 4134 rows
+14:02:39  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_03.csv
+14:02:39  INFO      Done.
