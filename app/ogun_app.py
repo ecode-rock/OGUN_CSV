@@ -594,10 +594,17 @@ def main():
     # Load all CSVs
     all_df = load_all_data()
 
+    # Derive season year from most recent game_date in data, fall back to current year
+    if not all_df.empty and "game_date" in all_df.columns:
+        season_year = pd.to_datetime(all_df["game_date"].max()).year
+    else:
+        import datetime
+        season_year = datetime.date.today().year
+
     # Title
     st.markdown(
         '<p class="ogun-title">⚾ OGUN RACE</p>'
-        '<p class="ogun-subtitle">Offensive Game Unifying Number · MLB 2025</p>',
+        f'<p class="ogun-subtitle">Offensive Game Unifying Number · MLB {season_year}</p>',
         unsafe_allow_html=True,
     )
 
