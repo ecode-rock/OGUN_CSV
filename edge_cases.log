@@ -265,3 +265,36 @@
 14:25:52  INFO        2026_03.csv — adding 258 new rows (was 27676, now 27934)
 14:25:52  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_03.csv
 14:25:52  INFO      Done.
+14:13:03  INFO      ============================================================
+14:13:03  INFO      fetch_yesterday.py  |  target date: 2026-03-26
+14:13:03  INFO      ============================================================
+14:13:03  INFO      Fetching schedule for 2026-03-26 ...
+14:13:04  INFO      Found 11 Final game(s). Fetching pitch data...
+14:13:04  INFO      [1/11] Fetching game_pk=823649
+14:13:04  INFO        game_pk=823649    PIT@NYM  331 rows
+14:13:05  INFO      [2/11] Fetching game_pk=823812
+14:13:06  INFO        game_pk=823812    CWS@MIL  341 rows
+14:13:07  INFO      [3/11] Fetching game_pk=824704
+14:13:07  INFO        game_pk=824704    WSH@CHC  320 rows
+14:13:09  INFO      [4/11] Fetching game_pk=824865
+14:13:09  INFO        game_pk=824865    MIN@BAL  251 rows
+14:13:11  INFO      [5/11] Fetching game_pk=824541
+14:13:11  INFO        game_pk=824541    BOS@CIN  257 rows
+14:13:12  INFO      [6/11] Fetching game_pk=824218
+14:13:13  INFO        game_pk=824218    LAA@HOU  323 rows
+14:13:14  INFO      [7/11] Fetching game_pk=823325
+14:13:14  INFO        game_pk=823325    DET@SD  294 rows
+14:13:16  INFO      [8/11] Fetching game_pk=823081
+14:13:16  INFO        game_pk=823081    TB@STL  313 rows
+14:13:18  INFO      [9/11] Fetching game_pk=823486
+14:13:18  INFO        game_pk=823486    TEX@PHI  291 rows
+14:13:19  INFO      [10/11] Fetching game_pk=823974
+14:13:20  INFO        game_pk=823974    AZ@LAD  280 rows
+14:13:21  INFO      [11/11] Fetching game_pk=823163
+14:13:21  INFO        game_pk=823163    CLE@SEA  296 rows
+14:13:23  INFO      Total raw rows: 3297
+14:13:23  INFO      Cleaning 3297 rows...
+14:13:23  INFO      Clean complete. Shape: (3297, 84)
+14:13:23  INFO        2026_03.csv — adding 3297 new rows (was 27934, now 31231)
+14:13:24  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_03.csv
+14:13:24  INFO      Done.
