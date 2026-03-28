@@ -51,5 +51,5 @@ jobs:
           else
             DATE_STR=$(date -u +"%Y-%m-%d")
             git commit -m "Auto-scrape: MLB data for ${DATE_STR}"
-            git push
+            git pull --rebase && git push
           fi
