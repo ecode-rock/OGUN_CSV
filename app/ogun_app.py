@@ -584,7 +584,7 @@ def render_panel(
     else:
         fig = build_race_figure(view_contact, color, n_show, shared_xmax)
 
-    st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False}, key=f"chart_{col_key}")
+    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False}, key=f"chart_{col_key}")
 
 
 # ── Main layout ───────────────────────────────────────────────────────────────

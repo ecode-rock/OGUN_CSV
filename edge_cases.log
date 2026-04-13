@@ -953,3 +953,29 @@
 23:58:07  INFO      Clean complete. Shape: (4570, 84)
 23:58:08  INFO        2026_04.csv — all 4570 rows already present, nothing to add.
 23:58:08  INFO      Done.
+19:01:17  INFO      ============================================================
+19:01:17  INFO      fetch_yesterday.py  |  target date: 2026-03-27
+19:01:17  INFO      ============================================================
+19:01:17  INFO      Fetching schedule for 2026-03-27 ...
+19:01:17  INFO      Found 8 Final game(s). Fetching pitch data...
+19:01:17  INFO      [1/8] Fetching game_pk=823243
+19:01:18  INFO        game_pk=823243    NYY@SF  275 rows
+19:01:19  INFO      [2/8] Fetching game_pk=822839
+19:01:19  INFO        game_pk=822839    ATH@TOR  265 rows
+19:01:21  INFO      [3/8] Fetching game_pk=823893
+19:01:21  INFO        game_pk=823893    COL@MIA  233 rows
+19:01:23  INFO      [4/8] Fetching game_pk=824946
+19:01:23  INFO        game_pk=824946    KC@ATL  276 rows
+19:01:25  INFO      [5/8] Fetching game_pk=824216
+19:01:25  INFO        game_pk=824216    LAA@HOU  321 rows
+19:01:27  INFO      [6/8] Fetching game_pk=823324
+19:01:27  INFO        game_pk=823324    DET@SD  288 rows
+19:01:29  INFO      [7/8] Fetching game_pk=823162
+19:01:29  INFO        game_pk=823162    CLE@SEA  278 rows
+19:01:31  INFO      [8/8] Fetching game_pk=823971
+19:01:31  INFO        game_pk=823971    AZ@LAD  310 rows
+19:01:33  INFO      Total raw rows: 2246
+19:01:33  INFO      Cleaning 2246 rows...
+19:01:33  INFO      Clean complete. Shape: (2246, 84)
+19:01:34  INFO        2026_03.csv — all 2246 rows already present, nothing to add.
+19:01:34  INFO      Done.
