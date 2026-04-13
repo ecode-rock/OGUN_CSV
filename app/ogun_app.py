@@ -22,12 +22,12 @@ st.set_page_config(
 # ── Data loading (CSV) ────────────────────────────────────────────────────────
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=3600)
 def load_all_data() -> pd.DataFrame:
     """
     Load and concatenate all monthly CSVs from data/.
     Returns empty DataFrame with correct columns if no files found.
-    Cached for 5 minutes — GitHub Actions commits refresh via Streamlit Cloud deploy.
+    Cached for 1 hour — reduces disk reads as CSVs grow.
     """
     csv_files = sorted(DATA_DIR.glob("*.csv"))
     if not csv_files:
