@@ -604,7 +604,7 @@ def main():
         st.header("Controls")
 
         if all_file_names:
-            default_months = all_file_names[-2:] if len(all_file_names) >= 2 else all_file_names
+            default_months = [n for n in all_file_names if n.startswith("2026_")] or all_file_names[-2:]
             selected_names = st.multiselect(
                 "Months loaded",
                 options=all_file_names,
