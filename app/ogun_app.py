@@ -23,18 +23,18 @@ st.set_page_config(
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 @st.cache_data(ttl=3600)
-def load_all_data() -> pd.DataFrame:
+def load_selected_data(selected_files: tuple) -> pd.DataFrame:
     """
-    Load and concatenate all monthly CSVs from data/.
-    Returns empty DataFrame with correct columns if no files found.
-    Cached for 1 hour — reduces disk reads as CSVs grow.
+    Load and concatenate the given monthly CSVs from data/.
+    selected_files is a tuple of str paths — used as the cache key.
+    Cached for 1 hour per unique selection.
     """
-    csv_files = sorted(DATA_DIR.glob("*.csv"))
-    if not csv_files:
+    if not selected_files:
         return pd.DataFrame()
 
     frames = []
-    for f in csv_files:
+    for path_str in selected_files:
+        f = Path(path_str)
         try:
             df = pd.read_csv(f, low_memory=False)
             frames.append(df)
@@ -482,29 +482,27 @@ def inject_css():
     .ab-row-hr td  { color: #f0b429 !important; font-weight: 700; }
     .panel-divider { border: none; border-top: 1px solid #21262d; margin: 16px 0; }
     .empty-state { color: #8b949e; font-size: 0.9rem; padding: 20px 0; text-align: center; }
+    .data-summary {
+        background: #0d1117; border: 1px solid #21262d; border-radius: 6px;
+        padding: 8px 12px; font-size: 0.75rem; color: #8b949e;
+        margin-top: 4px;
+    }
+    .data-summary b { color: #e6edf3; }
     </style>
     """, unsafe_allow_html=True)
 
 
 # ── Panel renderer ────────────────────────────────────────────────────────────
 def render_panel(
-    all_df: pd.DataFrame,
-    col_key: str,            # 'left' | 'right'
-    mode: str,               # 'TEAM' | 'PLAYER'
+    col_key: str,             # 'left' | 'right'
+    mode: str,                # 'TEAM' | 'PLAYER'
     selector: str,
-    date_mode: str,
-    start_date, end_date,
-    game_pk: int | None,
     view: str,
     slider_val: int,
     shared_xmax: float,
+    abs_df: pd.DataFrame,     # pre-fetched by main() — avoids double call
 ) -> None:
     color = team_color(selector if mode == "TEAM" else None)
-
-    abs_df = fetch_abs(
-        all_df, mode, selector, date_mode,
-        start_date, end_date, game_pk,
-    )
 
     # View filter
     filtered = apply_view_filter(abs_df, view)
@@ -573,7 +571,6 @@ def render_panel(
     )
 
     # Race figure
-    n_contact = len(contact)
     view_contact = apply_view_filter(abs_df, view)
     view_contact = view_contact.dropna(subset=["launch_speed", "hit_distance"])
     view_contact = view_contact[view_contact["hit_distance"] > 0].reset_index(drop=True)
@@ -591,8 +588,53 @@ def render_panel(
 def main():
     inject_css()
 
-    # Load all CSVs
-    all_df = load_all_data()
+    # ── Sidebar: month selector must come first so we know what to load ────────
+    all_csv_files = sorted(DATA_DIR.glob("*.csv"))
+    all_file_names = [f.name for f in all_csv_files]
+
+    with st.sidebar:
+        st.header("Controls")
+
+        # Month / file selector — controls how much data is loaded
+        if all_file_names:
+            selected_names = st.multiselect(
+                "Months loaded",
+                options=all_file_names,
+                default=all_file_names,
+                format_func=lambda n: n.replace(".csv", "").replace("_", " "),
+                help="Deselect months to speed up the app. Changes reload data.",
+            )
+        else:
+            selected_names = []
+
+        selected_files = tuple(
+            str(DATA_DIR / n) for n in sorted(selected_names)
+        )
+
+        st.divider()
+
+        date_mode = st.radio("Date Mode", ["DATE RANGE", "SINGLE GAME"], index=0)
+
+        # Placeholders — filled after data is loaded below
+        date_controls_placeholder = st.empty()
+
+        st.divider()
+        view = st.radio("View", VIEW_OPTIONS, index=0)
+
+        st.divider()
+        # Left panel
+        st.subheader("Panel A")
+        mode_l = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_l")
+        sel_l_placeholder = st.empty()
+
+        st.divider()
+        # Right panel
+        st.subheader("Panel B")
+        mode_r = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_r")
+        sel_r_placeholder = st.empty()
+
+    # ── Load only the selected months (cached) ────────────────────────────────
+    all_df = load_selected_data(selected_files)
 
     # Derive season year from most recent game_date in data, fall back to current year
     if not all_df.empty and "game_date" in all_df.columns:
@@ -610,8 +652,8 @@ def main():
 
     if all_df.empty:
         st.error(
-            "No data found in the `data/` folder. "
-            "Run `pipeline/fetch_range.py` to load data first."
+            "No data found. Select at least one month in the sidebar, "
+            "or run `pipeline/fetch_range.py` to load data first."
         )
         return
 
@@ -619,12 +661,23 @@ def main():
     teams   = get_teams(all_df)
     players = get_players(all_df)
 
-    # ── Sidebar controls ──────────────────────────────────────────────────────
+    # ── Fill sidebar placeholders now that data is loaded ─────────────────────
     with st.sidebar:
-        st.header("Controls")
+        # Data summary
+        n_rows  = len(all_df)
+        n_dates = len(available_dates)
+        n_games = all_df["game_pk"].nunique() if "game_pk" in all_df.columns else 0
+        st.markdown(
+            f'<div class="data-summary">'
+            f'<b>{len(selected_names)}</b> month(s) &nbsp;·&nbsp; '
+            f'<b>{n_dates}</b> dates &nbsp;·&nbsp; '
+            f'<b>{n_games:,}</b> games &nbsp;·&nbsp; '
+            f'<b>{n_rows:,}</b> rows'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
 
-        date_mode = st.radio("Date Mode", ["DATE RANGE", "SINGLE GAME"], index=0)
-
+    with date_controls_placeholder.container():
         if date_mode == "SINGLE GAME":
             sel_date = st.selectbox("Date", available_dates,
                                     index=len(available_dates) - 1 if available_dates else 0,
@@ -651,28 +704,19 @@ def main():
                 start_date = end_date = None
             game_pk = None
 
-        st.divider()
-        view = st.radio("View", VIEW_OPTIONS, index=0)
-
-        st.divider()
-        # Left panel
-        st.subheader("Panel A")
-        mode_l = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_l")
+    with sel_l_placeholder.container():
         if mode_l == "TEAM":
             sel_l = st.selectbox("Team", teams, key="sel_l")
         else:
             sel_l = st.selectbox("Player", players, key="sel_l_p")
 
-        st.divider()
-        # Right panel
-        st.subheader("Panel B")
-        mode_r = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_r")
+    with sel_r_placeholder.container():
         if mode_r == "TEAM":
             sel_r = st.selectbox("Team", teams, key="sel_r")
         else:
             sel_r = st.selectbox("Player", players, key="sel_r_p")
 
-    # ── Shared AB slider ──────────────────────────────────────────────────────
+    # ── Fetch AB data once per panel (shared between slider and render) ────────
     abs_l = fetch_abs(all_df, mode_l, sel_l, date_mode, start_date, end_date, game_pk)
     abs_r = fetch_abs(all_df, mode_r, sel_r, date_mode, start_date, end_date, game_pk)
 
@@ -698,16 +742,16 @@ def main():
 
     with col_l:
         render_panel(
-            all_df, "left", mode_l, sel_l,
-            date_mode, start_date, end_date, game_pk,
-            view, slider_val, shared_xmax,
+            col_key="left", mode=mode_l, selector=sel_l,
+            view=view, slider_val=slider_val, shared_xmax=shared_xmax,
+            abs_df=abs_l,
         )
 
     with col_r:
         render_panel(
-            all_df, "right", mode_r, sel_r,
-            date_mode, start_date, end_date, game_pk,
-            view, slider_val, shared_xmax,
+            col_key="right", mode=mode_r, selector=sel_r,
+            view=view, slider_val=slider_val, shared_xmax=shared_xmax,
+            abs_df=abs_r,
         )
 
 
