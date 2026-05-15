@@ -22,10 +22,21 @@ st.set_page_config(
 # ── Data loading (CSV) ────────────────────────────────────────────────────────
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
+# Only the columns the app actually uses — drops ~80% of CSV width
+KEEP_COLS = [
+    "game_date", "game_pk", "home_team", "away_team",
+    "ab_number", "inning", "batter_name", "team_batting",
+    "hit_distance", "launch_speed", "launch_angle",
+    "events", "is_barrel", "game_total_pitches",
+    "type", "is_last_pitch",
+]
+
 @st.cache_data(ttl=3600)
 def load_selected_data(selected_files: tuple) -> pd.DataFrame:
     """
     Load and concatenate the given monthly CSVs from data/.
+    Reads only the columns the app needs and pre-filters to last-pitch rows,
+    reducing memory ~90% vs loading full files.
     selected_files is a tuple of str paths — used as the cache key.
     Cached for 1 hour per unique selection.
     """
@@ -36,7 +47,10 @@ def load_selected_data(selected_files: tuple) -> pd.DataFrame:
     for path_str in selected_files:
         f = Path(path_str)
         try:
-            df = pd.read_csv(f, low_memory=False)
+            # Read only the columns that exist in this file
+            peek = pd.read_csv(f, nrows=0)
+            usecols = [c for c in KEEP_COLS if c in peek.columns]
+            df = pd.read_csv(f, usecols=usecols, low_memory=False)
             frames.append(df)
         except Exception as e:
             st.warning(f"Could not read {f.name}: {e}")
@@ -54,13 +68,19 @@ def load_selected_data(selected_files: tuple) -> pd.DataFrame:
     combined["hit_distance"]  = pd.to_numeric(combined["hit_distance"], errors="coerce")
     combined["game_total_pitches"] = pd.to_numeric(combined["game_total_pitches"], errors="coerce")
 
-    # is_last_pitch: stored as True/False string in CSV
+    # Normalise is_last_pitch before filtering
     if "is_last_pitch" in combined.columns:
         combined["is_last_pitch"] = combined["is_last_pitch"].map(
             {True: True, False: False, "True": True, "False": False}
         )
 
-    return combined
+    # Pre-filter to last-pitch rows — the only rows the app ever uses
+    if "type" in combined.columns:
+        combined = combined[combined["type"] == "pitch"]
+    if "is_last_pitch" in combined.columns:
+        combined = combined[combined["is_last_pitch"] == True]
+
+    return combined.reset_index(drop=True)
 
 
 # ── Team colours ──────────────────────────────────────────────────────────────
@@ -187,7 +207,8 @@ def get_games_on_date(df: pd.DataFrame, game_date) -> pd.DataFrame:
 def fetch_abs(df: pd.DataFrame, mode: str, selector: str, date_mode: str,
               start_date=None, end_date=None, game_pk: int | None = None) -> pd.DataFrame:
     """
-    Filter the master DataFrame to last-pitch rows for one panel.
+    Filter the pre-loaded DataFrame for one panel.
+    Data is already filtered to type=pitch + is_last_pitch=True at load time.
     mode: 'TEAM' | 'PLAYER'
     selector: team abbrev or batter_name
     date_mode: 'DATE RANGE' | 'SINGLE GAME'
@@ -199,20 +220,7 @@ def fetch_abs(df: pd.DataFrame, mode: str, selector: str, date_mode: str,
     if date_mode == "SINGLE GAME" and game_pk is None:
         return pd.DataFrame()
 
-    cols_needed = [
-        "ab_number", "inning", "game_date", "game_pk",
-        "batter_name", "team_batting",
-        "hit_distance", "launch_speed", "launch_angle",
-        "events", "is_barrel", "game_total_pitches", "type", "is_last_pitch",
-    ]
-    available = [c for c in cols_needed if c in df.columns]
-    sub = df[available].copy()
-
-    # Filter to pitches with is_last_pitch = True
-    if "type" in sub.columns:
-        sub = sub[sub["type"] == "pitch"]
-    if "is_last_pitch" in sub.columns:
-        sub = sub[sub["is_last_pitch"] == True]
+    sub = df.copy()
 
     # Mode filter
     if mode == "TEAM":
@@ -596,12 +604,13 @@ def main():
         st.header("Controls")
 
         if all_file_names:
+            default_months = all_file_names[-2:] if len(all_file_names) >= 2 else all_file_names
             selected_names = st.multiselect(
                 "Months loaded",
                 options=all_file_names,
-                default=all_file_names,
+                default=default_months,
                 format_func=lambda n: n.replace(".csv", "").replace("_", " "),
-                help="Deselect months to speed up the app. Changes reload data.",
+                help="Add older months to see more history. Fewer months = faster & more stable.",
             )
         else:
             selected_names = []
