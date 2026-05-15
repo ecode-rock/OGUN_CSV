@@ -588,14 +588,13 @@ def render_panel(
 def main():
     inject_css()
 
-    # ── Sidebar: month selector must come first so we know what to load ────────
+    # ── Sidebar block 1: data-independent controls (month selector + date mode) ─
     all_csv_files = sorted(DATA_DIR.glob("*.csv"))
     all_file_names = [f.name for f in all_csv_files]
 
     with st.sidebar:
         st.header("Controls")
 
-        # Month / file selector — controls how much data is loaded
         if all_file_names:
             selected_names = st.multiselect(
                 "Months loaded",
@@ -612,31 +611,20 @@ def main():
         )
 
         st.divider()
-
         date_mode = st.radio("Date Mode", ["DATE RANGE", "SINGLE GAME"], index=0)
-
-        # Placeholders — filled after data is loaded below
-        date_controls_placeholder = st.empty()
-
         st.divider()
         view = st.radio("View", VIEW_OPTIONS, index=0)
-
         st.divider()
-        # Left panel
         st.subheader("Panel A")
         mode_l = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_l")
-        sel_l_placeholder = st.empty()
-
         st.divider()
-        # Right panel
         st.subheader("Panel B")
         mode_r = st.radio("Mode", ["TEAM", "PLAYER"], key="mode_r")
-        sel_r_placeholder = st.empty()
 
-    # ── Load only the selected months (cached) ────────────────────────────────
+    # ── Load only the selected months (cached per unique selection) ───────────
     all_df = load_selected_data(selected_files)
 
-    # Derive season year from most recent game_date in data, fall back to current year
+    # Derive season year from most recent game_date, fall back to current year
     if not all_df.empty and "game_date" in all_df.columns:
         season_year = pd.to_datetime(all_df["game_date"].max()).year
     else:
@@ -661,9 +649,8 @@ def main():
     teams   = get_teams(all_df)
     players = get_players(all_df)
 
-    # ── Fill sidebar placeholders now that data is loaded ─────────────────────
+    # ── Sidebar block 2: data-dependent controls ──────────────────────────────
     with st.sidebar:
-        # Data summary
         n_rows  = len(all_df)
         n_dates = len(available_dates)
         n_games = all_df["game_pk"].nunique() if "game_pk" in all_df.columns else 0
@@ -677,7 +664,8 @@ def main():
             unsafe_allow_html=True,
         )
 
-    with date_controls_placeholder.container():
+        st.divider()
+
         if date_mode == "SINGLE GAME":
             sel_date = st.selectbox("Date", available_dates,
                                     index=len(available_dates) - 1 if available_dates else 0,
@@ -704,13 +692,15 @@ def main():
                 start_date = end_date = None
             game_pk = None
 
-    with sel_l_placeholder.container():
+        st.divider()
+
         if mode_l == "TEAM":
             sel_l = st.selectbox("Team", teams, key="sel_l")
         else:
             sel_l = st.selectbox("Player", players, key="sel_l_p")
 
-    with sel_r_placeholder.container():
+        st.divider()
+
         if mode_r == "TEAM":
             sel_r = st.selectbox("Team", teams, key="sel_r")
         else:
