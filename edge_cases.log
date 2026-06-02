@@ -3084,3 +3084,32 @@
 18:39:59  INFO        2026_05.csv — adding 4449 new rows (was 113748, now 118197)
 18:40:01  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_05.csv
 18:40:01  INFO      Done.
+17:25:05  INFO      ============================================================
+17:25:05  INFO      fetch_yesterday.py  |  target date: 2026-06-01
+17:25:05  INFO      ============================================================
+17:25:05  INFO      Fetching schedule for 2026-06-01 ...
+17:25:05  INFO      Found 9 Final game(s). Fetching pitch data...
+17:25:05  INFO      [1/9] Fetching game_pk=822974
+17:25:05  INFO        game_pk=822974    DET@TB  0 rows
+17:25:06  INFO      [2/9] Fetching game_pk=822730
+17:25:07  INFO        game_pk=822730    MIA@WSH  289 rows
+17:25:08  INFO      [3/9] Fetching game_pk=824510
+17:25:09  INFO        game_pk=824510    KC@CIN  309 rows
+17:25:10  INFO      [4/9] Fetching game_pk=823702
+17:25:11  INFO        game_pk=823702    CWS@MIN  280 rows
+17:25:12  INFO      [5/9] Fetching game_pk=823781
+17:25:13  INFO        game_pk=823781    SF@MIL  345 rows
+17:25:14  INFO      [6/9] Fetching game_pk=823050
+17:25:14  INFO        game_pk=823050    TEX@STL  0 rows
+17:25:16  INFO      [7/9] Fetching game_pk=824027
+17:25:17  INFO        game_pk=824027    COL@LAA  335 rows
+17:25:18  INFO      [8/9] Fetching game_pk=825078
+17:25:18  INFO        game_pk=825078    LAD@AZ  0 rows
+17:25:20  INFO      [9/9] Fetching game_pk=823131
+17:25:20  INFO        game_pk=823131    NYM@SEA  292 rows
+17:25:22  INFO      Total raw rows: 1850
+17:25:22  INFO      Cleaning 1850 rows...
+17:25:22  INFO      Clean complete. Shape: (1850, 84)
+17:25:22  INFO        2026_06.csv — new file, writing 1850 rows
+17:25:22  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_06.csv
+17:25:22  INFO      Done.
