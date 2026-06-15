@@ -3563,3 +3563,43 @@
 15:08:37  INFO        2026_06.csv — adding 4400 new rows (was 44620, now 49020)
 15:08:38  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_06.csv
 15:08:38  INFO      Done.
+17:59:19  INFO      ============================================================
+17:59:19  INFO      fetch_yesterday.py  |  target date: 2026-06-14
+17:59:19  INFO      ============================================================
+17:59:19  INFO      Fetching schedule for 2026-06-14 ...
+17:59:19  WARNING   POSTPONED   date=2026-06-14  game_pk=824424  DET@CLE
+17:59:19  INFO      Found 14 Final game(s). Fetching pitch data...
+17:59:19  INFO      [1/14] Fetching game_pk=823368
+17:59:20  INFO        game_pk=823368    MIA@PIT  319 rows
+17:59:21  INFO      [2/14] Fetching game_pk=824823
+17:59:21  INFO        game_pk=824823    SD@BAL  294 rows
+17:59:23  INFO      [3/14] Fetching game_pk=822722
+17:59:23  INFO        game_pk=822722    SEA@WSH  232 rows
+17:59:25  INFO      [4/14] Fetching game_pk=822801
+17:59:25  INFO        game_pk=822801    NYY@TOR  333 rows
+17:59:26  INFO      [5/14] Fetching game_pk=824506
+17:59:27  INFO        game_pk=824506    AZ@CIN  314 rows
+17:59:28  INFO      [6/14] Fetching game_pk=823615
+17:59:28  INFO        game_pk=823615    ATL@NYM  303 rows
+17:59:30  INFO      [7/14] Fetching game_pk=824099
+17:59:30  INFO        game_pk=824099    HOU@KC  246 rows
+17:59:32  INFO      [8/14] Fetching game_pk=823693
+17:59:32  INFO        game_pk=823693    STL@MIN  281 rows
+17:59:33  INFO      [9/14] Fetching game_pk=824586
+17:59:33  INFO        game_pk=824586    LAD@CWS  288 rows
+17:59:35  INFO      [10/14] Fetching game_pk=823777
+17:59:35  INFO        game_pk=823777    PHI@MIL  269 rows
+17:59:37  INFO      [11/14] Fetching game_pk=824994
+17:59:37  INFO        game_pk=824994    COL@ATH  359 rows
+17:59:39  INFO      [12/14] Fetching game_pk=823212
+17:59:39  INFO        game_pk=823212    CHC@SF  275 rows
+17:59:40  INFO      [13/14] Fetching game_pk=824021
+17:59:41  INFO        game_pk=824021    TB@LAA  306 rows
+17:59:42  INFO      [14/14] Fetching game_pk=824751
+17:59:42  INFO        game_pk=824751    TEX@BOS  282 rows
+17:59:44  INFO      Total raw rows: 4101
+17:59:44  INFO      Cleaning 4101 rows...
+17:59:44  INFO      Clean complete. Shape: (4101, 84)
+17:59:45  INFO        2026_06.csv — adding 4101 new rows (was 49020, now 53121)
+17:59:46  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_06.csv
+17:59:46  INFO      Done.
