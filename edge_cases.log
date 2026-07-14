@@ -4700,3 +4700,8 @@
 15:44:56  INFO        2026_07.csv — adding 4430 new rows (was 43581, now 48011)
 15:44:57  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_07.csv
 15:44:57  INFO      Done.
+14:53:25  INFO      ============================================================
+14:53:25  INFO      fetch_yesterday.py  |  target date: 2026-07-13
+14:53:25  INFO      ============================================================
+14:53:25  INFO      Fetching schedule for 2026-07-13 ...
+14:53:25  INFO      No Final games found for 2026-07-13 — nothing to do.
