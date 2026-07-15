@@ -4705,3 +4705,16 @@
 14:53:25  INFO      ============================================================
 14:53:25  INFO      Fetching schedule for 2026-07-13 ...
 14:53:25  INFO      No Final games found for 2026-07-13 — nothing to do.
+14:52:19  INFO      ============================================================
+14:52:19  INFO      fetch_yesterday.py  |  target date: 2026-07-14
+14:52:19  INFO      ============================================================
+14:52:19  INFO      Fetching schedule for 2026-07-14 ...
+14:52:19  INFO      Found 1 Final game(s). Fetching pitch data...
+14:52:19  INFO      [1/1] Fetching game_pk=823443
+14:52:20  INFO        game_pk=823443    AL@NL  260 rows
+14:52:21  INFO      Total raw rows: 260
+14:52:21  INFO      Cleaning 260 rows...
+14:52:21  INFO      Clean complete. Shape: (260, 84)
+14:52:22  INFO        2026_07.csv — adding 260 new rows (was 48011, now 48271)
+14:52:23  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_07.csv
+14:52:23  INFO      Done.
