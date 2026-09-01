@@ -6459,3 +6459,38 @@
 19:27:32  INFO        2026_08.csv — adding 4175 new rows (was 114975, now 119150)
 19:27:34  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_08.csv
 19:27:34  INFO      Done.
+17:13:04  INFO      ============================================================
+17:13:04  INFO      fetch_yesterday.py  |  target date: 2026-08-31
+17:13:04  INFO      ============================================================
+17:13:04  INFO      Fetching schedule for 2026-08-31 ...
+17:13:04  INFO      Found 12 Final game(s). Fetching pitch data...
+17:13:04  INFO      [1/12] Fetching game_pk=824911
+17:13:04  INFO        game_pk=824911    SF@ATL  260 rows
+17:13:06  INFO      [2/12] Fetching game_pk=824473
+17:13:06  INFO        game_pk=824473    SD@CIN  297 rows
+17:13:07  INFO      [3/12] Fetching game_pk=822932
+17:13:08  INFO        game_pk=822932    NYM@TB  273 rows
+17:13:09  INFO      [4/12] Fetching game_pk=824719
+17:13:09  INFO        game_pk=824719    SEA@BOS  307 rows
+17:13:11  INFO      [5/12] Fetching game_pk=822689
+17:13:11  INFO        game_pk=822689    MIA@WSH  276 rows
+17:13:12  INFO      [6/12] Fetching game_pk=823663
+17:13:13  INFO        game_pk=823663    DET@MIN  296 rows
+17:13:14  INFO      [7/12] Fetching game_pk=824635
+17:13:14  INFO        game_pk=824635    MIL@CHC  334 rows
+17:13:16  INFO      [8/12] Fetching game_pk=822855
+17:13:16  INFO        game_pk=822855    ATH@TEX  268 rows
+17:13:18  INFO      [9/12] Fetching game_pk=824149
+17:13:18  INFO        game_pk=824149    CWS@HOU  327 rows
+17:13:20  INFO      [10/12] Fetching game_pk=824314
+17:13:20  INFO        game_pk=824314    BAL@COL  263 rows
+17:13:21  INFO      [11/12] Fetching game_pk=823982
+17:13:21  INFO        game_pk=823982    NYY@LAA  307 rows
+17:13:23  INFO      [12/12] Fetching game_pk=825040
+17:13:23  INFO        game_pk=825040    PHI@AZ  311 rows
+17:13:25  INFO      Total raw rows: 3519
+17:13:25  INFO      Cleaning 3519 rows...
+17:13:25  INFO      Clean complete. Shape: (3519, 84)
+17:13:26  INFO        2026_08.csv — adding 3519 new rows (was 119150, now 122669)
+17:13:29  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_08.csv
+17:13:29  INFO      Done.
