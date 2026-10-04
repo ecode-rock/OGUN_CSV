@@ -7574,3 +7574,22 @@
 17:02:28  INFO      ============================================================
 17:02:28  INFO      Fetching schedule for 2026-10-02 ...
 17:02:28  INFO      No Final games found for 2026-10-02 — nothing to do.
+17:21:24  INFO      ============================================================
+17:21:24  INFO      fetch_yesterday.py  |  target date: 2026-10-03
+17:21:24  INFO      ============================================================
+17:21:24  INFO      Fetching schedule for 2026-10-03 ...
+17:21:25  INFO      Found 4 Final game(s). Fetching pitch data...
+17:21:25  INFO      [1/4] Fetching game_pk=849829
+17:21:25  INFO        game_pk=849829    CWS@CLE  287 rows
+17:21:26  INFO      [2/4] Fetching game_pk=849828
+17:21:27  INFO        game_pk=849828    ATL@LAD  290 rows
+17:21:28  INFO      [3/4] Fetching game_pk=849835
+17:21:28  INFO        game_pk=849835    NYY@TB  243 rows
+17:21:30  INFO      [4/4] Fetching game_pk=849830
+17:21:30  INFO        game_pk=849830    SD@MIL  301 rows
+17:21:32  INFO      Total raw rows: 1121
+17:21:32  INFO      Cleaning 1121 rows...
+17:21:32  INFO      Clean complete. Shape: (1121, 84)
+17:21:32  INFO        2026_10.csv — adding 1121 new rows (was 277, now 1398)
+17:21:32  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_10.csv
+17:21:32  INFO      Done.
