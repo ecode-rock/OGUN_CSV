@@ -7623,3 +7623,18 @@
 18:51:11  INFO        2026_10.csv — adding 555 new rows (was 2004, now 2559)
 18:51:11  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_10.csv
 18:51:11  INFO      Done.
+19:15:39  INFO      ============================================================
+19:15:39  INFO      fetch_yesterday.py  |  target date: 2026-10-06
+19:15:39  INFO      ============================================================
+19:15:39  INFO      Fetching schedule for 2026-10-06 ...
+19:15:39  INFO      Found 2 Final game(s). Fetching pitch data...
+19:15:39  INFO      [1/2] Fetching game_pk=849819
+19:15:40  INFO        game_pk=849819    LAD@ATL  300 rows
+19:15:41  INFO      [2/2] Fetching game_pk=849826
+19:15:41  INFO        game_pk=849826    MIL@SD  298 rows
+19:15:43  INFO      Total raw rows: 598
+19:15:43  INFO      Cleaning 598 rows...
+19:15:43  INFO      Clean complete. Shape: (598, 84)
+19:15:43  INFO        2026_10.csv — adding 598 new rows (was 2559, now 3157)
+19:15:43  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_10.csv
+19:15:43  INFO      Done.
