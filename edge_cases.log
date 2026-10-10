@@ -7670,3 +7670,8 @@
 18:43:12  INFO        2026_10.csv — adding 368 new rows (was 4281, now 4649)
 18:43:12  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_10.csv
 18:43:12  INFO      Done.
+17:41:54  INFO      ============================================================
+17:41:54  INFO      fetch_yesterday.py  |  target date: 2026-10-09
+17:41:54  INFO      ============================================================
+17:41:54  INFO      Fetching schedule for 2026-10-09 ...
+17:41:55  INFO      No Final games found for 2026-10-09 — nothing to do.
