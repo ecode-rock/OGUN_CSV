@@ -7763,3 +7763,16 @@
 16:11:30  INFO      Fetching schedule for 2026-10-16 ...
 16:11:30  WARNING   POSTPONED   date=2026-10-16  game_pk=849817  TB@CLE
 16:11:30  INFO      No Final games found for 2026-10-16 — nothing to do.
+16:24:46  INFO      ============================================================
+16:24:46  INFO      fetch_yesterday.py  |  target date: 2026-10-17
+16:24:46  INFO      ============================================================
+16:24:46  INFO      Fetching schedule for 2026-10-17 ...
+16:24:46  INFO      Found 1 Final game(s). Fetching pitch data...
+16:24:46  INFO      [1/1] Fetching game_pk=849816
+16:24:46  INFO        game_pk=849816    TB@CLE  300 rows
+16:24:48  INFO      Total raw rows: 300
+16:24:48  INFO      Cleaning 300 rows...
+16:24:48  INFO      Clean complete. Shape: (300, 84)
+16:24:48  INFO        2026_10.csv — adding 300 new rows (was 6847, now 7147)
+16:24:48  INFO        Wrote /home/runner/work/OGUN_CSV/OGUN_CSV/data/2026_10.csv
+16:24:48  INFO      Done.
