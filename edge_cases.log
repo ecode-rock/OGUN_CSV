@@ -7935,3 +7935,15 @@
 22:12:52  INFO      Clean complete. Shape: (263, 84)
 22:12:52  INFO        2026_10.csv — all 263 rows already present, nothing to add.
 22:12:52  INFO      Done.
+20:00:55  INFO      ============================================================
+20:00:55  INFO      fetch_yesterday.py  |  target date: 2026-11-02
+20:00:55  INFO      ============================================================
+20:00:55  INFO      Fetching schedule for 2026-11-02 ...
+20:00:55  INFO      Found 1 Final game(s). Fetching pitch data...
+20:00:55  INFO      [1/1] Fetching game_pk=849805
+20:00:56  INFO        game_pk=849805    TB@MIL  263 rows
+20:00:57  INFO      Total raw rows: 263
+20:00:57  INFO      Cleaning 263 rows...
+20:00:57  INFO      Clean complete. Shape: (263, 84)
+20:00:57  INFO        2026_10.csv — all 263 rows already present, nothing to add.
+20:00:57  INFO      Done.
