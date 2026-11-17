@@ -8103,3 +8103,8 @@
 22:47:33  INFO      Clean complete. Shape: (263, 84)
 22:47:33  INFO        2026_10.csv — all 263 rows already present, nothing to add.
 22:47:33  INFO      Done.
+21:33:29  INFO      ============================================================
+21:33:29  INFO      fetch_yesterday.py  |  target date: 2026-11-16
+21:33:29  INFO      ============================================================
+21:33:29  INFO      Fetching schedule for 2026-11-16 ...
+21:33:29  INFO      No Final games found for 2026-11-16 — nothing to do.
