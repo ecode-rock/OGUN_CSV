@@ -8138,3 +8138,8 @@
 00:38:49  INFO      ============================================================
 00:38:49  INFO      Fetching schedule for 2026-11-23 ...
 00:38:50  INFO      No Final games found for 2026-11-23 — nothing to do.
+22:57:32  INFO      ============================================================
+22:57:32  INFO      fetch_yesterday.py  |  target date: 2026-11-23
+22:57:32  INFO      ============================================================
+22:57:32  INFO      Fetching schedule for 2026-11-23 ...
+22:57:33  INFO      No Final games found for 2026-11-23 — nothing to do.
